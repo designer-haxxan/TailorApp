@@ -1,0 +1,18 @@
+/* responsive.css */
+@media (min-width: 992px) {
+  body { padding-bottom: 0; }
+  .app-menu { position: sticky; top: 0; height: 100vh; flex: none; width: 250px; border-left: 1px solid #e0e6e2; display: flex !important; flex-direction: column; visibility: visible !important; transform: none !important; }
+  .menu-list { padding-top: 6px; }
+  .view-pad { padding: 20px 24px; }
+  .meas-grid { grid-template-columns: repeat(4, 1fr); }
+  .toast-container { top: 70px; }
+}
+@media (min-width: 576px) and (max-width: 991.98px) {
+  .meas-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 575.98px) {
+  :root { --bs-body-font-size: 1.05rem; }
+  .stat-v { font-size: 1.25rem; }
+  .modal-dialog { margin: 0; }
+  .modal-fullscreen-sm-down .modal-content { border-radius: 0; }
+}

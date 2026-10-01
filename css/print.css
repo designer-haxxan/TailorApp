@@ -1,0 +1,46 @@
+/* print.css — separate print layouts for 58mm, 80mm, A4 and garment tags */
+@media print {
+  html, body { background: #fff !important; padding: 0 !important; margin: 0 !important; overflow: visible !important; }
+  body > *:not(#printArea) { display: none !important; }
+  #printArea { display: block !important; }
+  .doc-page { page-break-after: always; break-after: page; }
+  .doc-page:last-child { page-break-after: auto; break-after: auto; }
+}
+#printArea .doc, .doc-preview .doc { font-family: 'JameelNoori', 'Noto Nastaliq Urdu', serif; color: #000; background: #fff; direction: rtl; text-align: right; line-height: 1.75; box-sizing: border-box; }
+.doc .d-title { font-size: 1.35em; font-weight: bold; text-align: center; line-height: 1.6; }
+.doc .d-sub { text-align: center; font-size: .95em; }
+.doc .d-c { text-align: center; }
+.doc .d-logo { display: block; margin: 0 auto 1mm; max-height: 16mm; max-width: 40mm; object-fit: contain; }
+.doc .d-hr { border-top: 1px dashed #000; margin: 1mm 0; height: 0; }
+.doc .d-hr.solid { border-top-style: solid; }
+.doc .d-kv { display: flex; justify-content: space-between; gap: 4px; align-items: baseline; }
+.doc .d-kv .v { text-align: left; font-weight: bold; }
+.doc .d-kv.big { font-size: 1.15em; font-weight: bold; }
+.doc .d-sp { height: 2mm; }
+.doc .d-bc { text-align: center; direction: ltr; line-height: 1; }
+.doc .d-bc svg { max-width: 100%; }
+.doc .d-bc .t { font-family: Arial, sans-serif; font-size: 8pt; letter-spacing: 1px; }
+.doc table.d-t { width: 100%; border-collapse: collapse; }
+.doc table.d-t th, .doc table.d-t td { padding: 0 2px; vertical-align: top; text-align: right; line-height: 1.55; font-size: .92em; }
+.doc table.d-t th { border-bottom: 1px solid #000; border-top: 1px solid #000; font-weight: bold; }
+.doc table.d-t td.n, .doc table.d-t th.n { text-align: left; direction: ltr; white-space: nowrap; }
+.doc .d-cols { display: flex; justify-content: space-between; gap: 3px; }
+.doc .d-cols > div { flex: 1; }
+.doc .b { font-weight: bold; }
+/* thermal widths */
+.doc.th { padding: 1mm 1.5mm; }
+.doc.w58 { width: 58mm; font-size: 10.5pt; }
+.doc.w80 { width: 80mm; font-size: 12pt; }
+.doc.w58 .d-hr, .doc.w80 .d-hr { margin: .8mm 0; }
+/* A4 */
+.doc.a4 { width: 190mm; font-size: 12.5pt; padding: 4mm; }
+.doc.a4 .d-title { font-size: 1.6em; }
+.doc.a4 table.d-t th, .doc.a4 table.d-t td { border: 1px solid #555; padding: 1mm 2mm; font-size: 1em; }
+.doc.a4 .d-hr { margin: 2mm 0; border-top-style: solid; }
+/* tag */
+.doc.tag { padding: .6mm 1.5mm; overflow: hidden; line-height: 1.35; }
+.doc.tag .d-bc .t { font-size: 6pt; line-height: 1; }
+.doc.tag .d-cols, .doc.tag div { line-height: 1.35; }
+.doc.tag .d-kv { line-height: 1.45; }
+.doc-preview { overflow: auto; background: #ddd; padding: 8px; text-align: center; }
+.doc-preview .doc { display: inline-block; text-align: right; box-shadow: 0 0 6px rgba(0,0,0,.3); margin: 4px; }

@@ -1,0 +1,14 @@
+/* rtl.css — RTL-specific fixes */
+html, body { direction: rtl; text-align: right; }
+input[type=date], input[type=time] { text-align: right; direction: ltr; }
+input[inputmode=decimal], input[inputmode=tel] { text-align: right; }
+.form-check { padding-right: 1.6em; padding-left: 0; }
+.form-check .form-check-input { float: right; margin-right: -1.6em; margin-left: 0; }
+.modal-footer { justify-content: flex-start; flex-direction: row; }
+.list-group-item { text-align: right; }
+.text-start { text-align: right !important; }
+.text-end { text-align: left !important; }
+.table th, .table td { text-align: right; }
+.table .n { text-align: left; direction: ltr; font-variant-numeric: tabular-nums; }
+select.form-select { background-position: left .75rem center; padding-left: 2.25rem; padding-right: .75rem; }
+bdi[dir=ltr] { unicode-bidi: isolate; }
