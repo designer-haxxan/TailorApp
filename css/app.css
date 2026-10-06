@@ -1,4 +1,9 @@
 /* app.css — theme, layout, components */
+@keyframes magicPulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(15,107,63,.5); }
+  50%      { box-shadow: 0 0 0 12px rgba(15,107,63,0); }
+}
+.btn-magic-pulse { animation: magicPulse 1.2s ease-in-out 4; }
 @font-face {
   font-family: 'JameelNoori';
   src: url('../assets/fonts/Jameel-Noori-Nastaleeq.ttf') format('truetype');
