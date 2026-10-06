@@ -220,6 +220,7 @@
   Print.btConnected = () => !!(Print.bt.dev && Print.bt.dev.gatt && Print.bt.dev.gatt.connected && Print.bt.ch);
   const sleep = ms => new Promise(r => setTimeout(r, ms));
   async function attach(dev) {
+    if (dev.gatt && dev.gatt.connected) { try { dev.gatt.disconnect(); } catch (_) {} await sleep(300); }
     let srv = null, last;
     for (let i = 0; i < 3 && !srv; i++) { try { srv = await dev.gatt.connect(); } catch (e) { last = e; await sleep(600); } }
     if (!srv) throw last || new Error('connect');
@@ -239,18 +240,24 @@
   // silent reconnect to the previously granted printer (no picker); returns false if not possible
   Print.btReconnect = async function () {
     if (Print.btConnected()) return true;
-    if (!Print.btSupported() || !navigator.bluetooth.getDevices || !DB.settings.printer.id) return false;
-    try { const dev = (await navigator.bluetooth.getDevices()).find(d => d.id === DB.settings.printer.id); if (!dev) return false; await attach(dev); return true; } catch (e) { return false; }
+    if (Print._connecting || !Print.btSupported() || !navigator.bluetooth.getDevices || !DB.settings.printer.id) return false;
+    Print._connecting = true;
+    try { const dev = (await navigator.bluetooth.getDevices()).find(d => d.id === DB.settings.printer.id); if (!dev) return false; await attach(dev); return true; } catch (e) { return false; } finally { Print._connecting = false; }
   };
   Print.btDisconnect = () => { if (Print.bt.dev && Print.bt.dev.gatt.connected) Print.bt.dev.gatt.disconnect(); Print.bt.ch = null; };
   Print.btSend = async function (bytes) {
+    if (Print._sending) throw new Error('پچھلا پرنٹ ابھی جاری ہے');
     const ch = Print.bt.ch; if (!ch) throw new Error('پرنٹر منسلک نہیں');
+    Print._sending = true;
     const size = Math.max(20, Math.min(512, +DB.settings.printer.chunk || 20));
-    for (let i = 0; i < bytes.length; i += size) {
-      const part = bytes.slice(i, i + size);
-      if (ch.writeValueWithResponse) await ch.writeValueWithResponse(part); else if (ch.properties.writeWithoutResponse) await ch.writeValueWithoutResponse(part); else await ch.writeValue(part);
-      await sleep(15);
-    }
+    const noResp = !!ch.properties.writeWithoutResponse;
+    try {
+      for (let i = 0; i < bytes.length; i += size) {
+        const part = bytes.slice(i, i + size);
+        if (noResp) await ch.writeValueWithoutResponse(part); else await ch.writeValueWithResponse(part);
+        await sleep(20);
+      }
+    } finally { Print._sending = false; }
   };
 
   // ===================== output =====================
