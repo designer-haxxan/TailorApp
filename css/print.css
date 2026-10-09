@@ -30,8 +30,21 @@
 /* thermal widths */
 .doc.th { padding: 1mm 1.5mm; }
 .doc.w58 { width: 58mm; font-size: 10.5pt; }
-.doc.w80 { width: 80mm; font-size: 12pt; }
-.doc.w58 .d-hr, .doc.w80 .d-hr { margin: .8mm 0; }
+.doc.w58 .d-hr { margin: .8mm 0; }
+
+/* 80mm — Milestone MHT-P80A */
+.doc.w80 { width: 80mm; font-size: 11.5pt; padding: 2mm 2.5mm 6mm; }
+.doc.w80 .d-hr { margin: 1.2mm 0; }
+.doc.w80 .d-logo { max-height: 20mm; max-width: 55mm; }
+.doc.w80 .d-title { font-size: 1.5em; }
+.doc.w80 .d-sub { font-size: .9em; line-height: 1.6; }
+.doc.w80 .d-kv { padding: .3mm 0; }
+.doc.w80 .d-kv.big { font-size: 1.3em; border: 1.5px solid #000; padding: 1mm 1.5mm; margin: 1.5mm 0; }
+.doc.w80 table.d-t { font-size: .92em; margin: .5mm 0; }
+.doc.w80 table.d-t th { padding: 1mm 3px; background: #000; color: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.doc.w80 table.d-t td { padding: .6mm 3px; border-bottom: 1px dotted #bbb; }
+.doc.w80 .d-bc svg { height: 14mm !important; }
+.doc.w80 .d-bc .t { font-size: 9pt; letter-spacing: 1px; }
 /* A4 */
 .doc.a4 { width: 190mm; font-size: 12.5pt; padding: 4mm; }
 .doc.a4 .d-title { font-size: 1.6em; }
